@@ -1,0 +1,96 @@
+const marchandise = {
+  containerId: 226,
+  destination: "BF, Ouaga, Bendogo",
+  weight: 50,
+  unit: "lb",
+  hazmat: true
+}
+
+let newObject = {} ;
+function normalizeUnits (manifest) {
+  newObject = {...manifest};
+  if (manifest.unit === "lb") {
+    newObject.weight = manifest.weight * 0.45;
+    newObject.unit = "kg";
+  }
+  return newObject;
+};
+
+console.log(normalizeUnits(marchandise));
+console.log(normalizeUnits({}));
+
+
+function validateManifest(manifest) {
+  let newObject2 = {};
+
+  if (manifest.hasOwnProperty("containerId") === false) {
+    newObject2.containerId = "Missing";
+  };
+  if (manifest.hasOwnProperty("destination") === false) {
+    newObject2.destination = "Missing";
+  };
+  if (manifest.hasOwnProperty("weight") === false) {
+    newObject2.weight = "Missing";
+  };
+  if (manifest.hasOwnProperty("unit") === false) {
+    newObject2.unit = "Missing";
+  };
+  if (manifest.hasOwnProperty("hazmat") === false) {
+    newObject2.hazmat = "Missing";
+  };
+  
+  if (manifest.hasOwnProperty("containerId") === true) {
+    if (typeof manifest.containerId !== "number" || manifest.containerId <= 0 || Number.isInteger(manifest.containerId) !== true) {
+    newObject2.containerId = "Invalid";
+    };
+  }
+  
+  if (manifest.hasOwnProperty("destination") === true) {
+    if (typeof manifest.destination !== "string" || manifest.destination.trim() === "") {
+    newObject2.destination = "Invalid";
+    };
+  }
+  
+  if (manifest.hasOwnProperty("weight") === true) {
+    if (typeof manifest.weight !== "number" || manifest.weight <= 0 || Number.isNaN(manifest.weight)) {
+    newObject2.weight = "Invalid";
+    };
+  }
+  
+  if (manifest.hasOwnProperty("unit") === true) {
+    if (manifest.unit !== "lb" && manifest.unit !== "kg") {
+    newObject2.unit = "Invalid";
+    };
+  }
+  
+  if (manifest.hasOwnProperty("hazmat") === true) {
+    if (typeof manifest.hazmat !== "boolean") {
+    newObject2.hazmat = "Invalid";
+    };
+  } 
+  
+    
+return newObject2; 
+};
+
+console.log(validateManifest(marchandise));
+console.log(validateManifest({unit: ""}));
+
+function processManifest(manifest) {
+  
+  if (manifest.hasOwnProperty("containerId") === true && typeof manifest.containerId === "number" && manifest.containerId > 0 && Number.isInteger(manifest.containerId) === true && manifest.hasOwnProperty("destination") === true && typeof manifest.destination === "string" && manifest.destination.trim() !== "" && manifest.hasOwnProperty("weight") === true && typeof manifest.weight === "number" && manifest.weight > 0 && Number.isNaN(manifest.weight) === false && manifest.hasOwnProperty("unit") === true && (manifest.unit === "lb" || manifest.unit === "kg") && manifest.hasOwnProperty("hazmat") === true && typeof manifest.hazmat === "boolean") {
+    
+    normalizeUnits(manifest);
+    
+    console.log(`Validation success: ${manifest.containerId}`);
+    console.log(`Total weight: ${newObject.weight} kg`);
+  } else {
+    console.log(`Validation error: ${manifest.containerId}`);
+    
+    console.log(validateManifest(manifest));
+  }
+  
+}
+
+console.log(processManifest(marchandise));
+console.log(processManifest({ containerId: 55, destination: "Carmel", weight: 400, unit: "lb", hazmat: false })); 
