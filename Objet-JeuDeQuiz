@@ -1,0 +1,21 @@
+let questions = [{category: "nature", question: "Quelle harbre donnes des mangues?", choices: ["manguier", "bananier", "moringa"], answer: "manguier",}, {category: "money", question: "Combien coute le pain?", choices: ["100", "150", "200"], answer: "150",}, {category: "famille", question: "comment tu t'appel?", choices: ["yass", "clovis", "baron"], answer: "yass",}, {category: "enfants", question: "qui est ton enfant?", choices: ["moi", "toi", "nous"], answer: "toi",}, {category: "vie", question: "Comment vis tu?", choices: ["bien", "mal", "catastrophique"], answer: "bien",}];
+
+function getRandomQuestion(quest) {
+
+  return quest[Math.floor(Math.random() * quest.length)];
+};
+console.log(getRandomQuestion(questions))
+
+
+function getRandomComputerChoice(choice) {
+  return choice[Math.floor(Math.random() * choice.length)];
+};
+console.log(getRandomComputerChoice(questions[0].choices))
+
+function getResults(questObj, compChoice) {
+  if (questObj.answer === compChoice) {
+    return `The computer's choice is correct!`;
+  } else {
+    return `The computer's choice is wrong. The correct answer is: ${questObj.answer}`;
+  }
+}
