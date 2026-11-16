@@ -1,0 +1,42 @@
+function fact(num) {
+  let newNum = 1
+  for (num ;num > 0 ;num--) {
+    newNum = newNum * num
+  }
+  return newNum;
+};
+console.log(fact(4))
+
+// Code officiel.
+
+let num1 = 10;
+function factorialCalculator(numb) {
+  let result = 1;
+  for (let nu = 1; nu <= numb; nu++) {
+    result = result * nu
+  };
+  return result;
+};
+
+let factorial1 = factorialCalculator(num1);
+const resultMsg = `Factorial of ${num1} is ${factorial1}`;
+console.log(resultMsg);
+
+// Autre code officiel.
+
+let num2 = 5;
+function factorialCalculator(numb) {
+  let result = 1;
+  let nu = 1;
+  
+  while (nu <= numb) {
+    result = result * nu
+    nu++
+  }
+
+  return result;
+};
+
+let factorial2 = factorialCalculator(num2);
+const resultMsg1 = `Factorial of ${num2} is ${factorial2}`;
+console.log(resultMsg);
