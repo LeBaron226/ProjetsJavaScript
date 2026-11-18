@@ -1,0 +1,13 @@
+function findLongestWordLength(sentence) {
+  let long = 0;
+  let words = sentence.split(" ");
+  
+  for (let word of words) {
+    if (word !== "") {
+      while (word.length > long) {
+        long = word.length;
+      };
+    };
+  };
+  return long;
+};
