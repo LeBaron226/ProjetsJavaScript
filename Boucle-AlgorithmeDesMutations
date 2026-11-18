@@ -1,0 +1,15 @@
+function mutation(array) {
+  let str1 = array[0].toLowerCase();
+  let str2 = array[1].toLowerCase();
+  let result = false;
+
+  for (let vowel2 of str2) {
+    if (str1.includes(vowel2)) {
+      result = true;
+    } else {
+      result = false;
+      break
+    };
+  };
+  return result;
+};
