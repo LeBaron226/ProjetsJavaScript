@@ -1,0 +1,18 @@
+function fearNotLetter(sentence) {
+  let vowels = "abcdefghijklmnopqrstuvwxyz";
+  let sent = sentence.toLowerCase();
+  let result = undefined;
+
+  let index1 = vowels.indexOf(sent[0]);
+
+  for (let vowel of sent) {
+    if (vowel === vowels[index1]) {
+      index1++;
+    } else {
+      result = vowels[index1];
+      break
+    };
+  };
+
+  return result;
+};
