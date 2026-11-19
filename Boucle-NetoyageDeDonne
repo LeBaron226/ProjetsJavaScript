@@ -1,0 +1,49 @@
+function sanitizeLog(entry, disallowedCharacters) {
+  let result = entry;
+
+  for (let ent of entry) {
+    for (let dis of disallowedCharacters) {
+      if (ent === dis) {
+        result = result.slice(0, result.indexOf(ent)) + "#" + result.slice(result.indexOf(ent) + 1);
+      };
+    };
+  };
+
+  return result;
+};
+
+function cleanLogs(logs, disallowedCharacters) {
+  let x = logs.length;
+  let y = 0;
+  let z = 0;
+  let result;
+
+  ice: for (let str of logs) {
+    
+    for (let word of str) {
+      
+      if (word === "$") {
+        result = `Sanitizing stopped. Failure Reason: Fatal character occurred.`;
+        break ice
+      } 
+    };
+    if (str[0] === "/") {
+      z++
+    } else {
+      let sanitresult = sanitizeLog(str, disallowedCharacters);
+      if (sanitresult !== str) {
+        y++
+      };
+    };
+    result = `Total Entry Count: ${x}. Sanitized Entry Count: ${y}. Informational Entry Count: ${z}. Finished sanitizing logs.`;
+  };
+
+  return result;
+};
+
+let logs_2 = [
+  "FATAL: System overload detected, shutting down",
+  "DEBUG: token=def456$ refreshed for session",
+  "ERROR: Null pointer exception in module auth"
+];
+console.log(cleanLogs(logs_2, ["a", "A", "c", "T"]))
