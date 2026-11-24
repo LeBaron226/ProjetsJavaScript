@@ -1,0 +1,13 @@
+function chunkArrayInGroups(array, num) {
+    let crew = array.slice();
+    let tab = [];
+
+    while (crew.length >= num) {
+        tab.push(crew.splice(0, num))
+    }
+    if (crew.length != 0) {
+        tab.push(crew.slice())
+    }
+
+    return tab
+};
